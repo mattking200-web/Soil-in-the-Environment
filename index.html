@@ -1,35 +1,2447 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grade 3 Science – Soil Explorer</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f8f3; color: #333; }
-    header { background-color: #4caf50; color: white; padding: 1.5rem; text-align: center; }
-    nav { background-color: #2e7d32; padding: 0.5rem; display: flex; flex-wrap: wrap; justify-content: center; }
-    nav a { color: white; text-decoration: none; margin: 0.4rem 0.8rem; font-weight: bold; }
-    main { padding: 1.5rem; max-width: 1000px; margin: auto; }
-    section { background: white; padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    h2 { color: #2e7d32; }
-    .info { margin-bottom: 1rem; line-height: 1.6; }
-    .questions { background:#fffde7; padding:1rem; border-left:6px solid #fbc02d; margin-bottom:1rem; }
-    footer { background-color: #2e7d32; color: white; text-align: center; padding: 1rem; }
-    button { background-color: #4caf50; color: white; padding: 0.5rem 1rem; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background-color: #45a049; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soils in the Environment! - Grade 3 Science</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Fredoka:wght@400;600;700&family=Chewy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink: #FF6B9D;
+            --yellow: #FFD93D;
+            --green: #6BCF7F;
+            --blue: #4D96FF;
+            --purple: #9D4EDD;
+            --orange: #FF9F1C;
+            --teal: #06FFA5;
+            --red: #EF476F;
+            --brown: #8B4513;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8D5C4 100%);
+            color: #2D3748;
+            overflow-x: hidden;
+        }
+
+        .bg-shapes {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) { width: 100px; height: 100px; background: var(--brown); top: 10%; left: 10%; animation-delay: 0s; }
+        .shape:nth-child(2) { width: 150px; height: 150px; background: var(--green); top: 50%; left: 70%; animation-delay: 5s; }
+        .shape:nth-child(3) { width: 80px; height: 80px; background: var(--orange); top: 70%; left: 20%; animation-delay: 10s; }
+        .shape:nth-child(4) { width: 120px; height: 120px; background: var(--yellow); top: 30%; left: 80%; animation-delay: 15s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(0, -60px) rotate(180deg); }
+            75% { transform: translate(-30px, -30px) rotate(270deg); }
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--brown) 0%, #A0522D 50%, var(--orange) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '🌱';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.15;
+            top: -20px;
+            left: 5%;
+            animation: bounce 3s infinite;
+        }
+
+        header::after {
+            content: '🪱';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.15;
+            top: -20px;
+            right: 5%;
+            animation: bounce 3s infinite 1.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 
+                4px 4px 0 var(--brown),
+                8px 8px 0 var(--orange),
+                12px 12px 30px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            animation: wiggle 2s ease-in-out infinite;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+        }
+
+        .subtitle {
+            font-family: 'Chewy', cursive;
+            font-size: 2rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 5px solid var(--brown);
+            transition: all 0.3s;
+        }
+
+        nav.hidden {
+            display: none;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--brown), #A0522D);
+            color: white;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+            text-transform: uppercase;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 0 rgba(0,0,0,0.2);
+        }
+
+        .nav-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--green), #4CAF50);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .back-button {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 101;
+            background: linear-gradient(135deg, var(--brown), var(--orange));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(139, 69, 19, 0.4);
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(139, 69, 19, 0.6);
+        }
+
+        .back-button.show {
+            display: block;
+            animation: slideInLeft 0.5s;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .bottom-back-button {
+            display: none;
+            margin: 3rem auto;
+            padding: 1.5rem 3rem;
+            font-size: 1.3rem;
+            position: relative;
+        }
+
+        .bottom-back-button.show {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeInUp 0.6s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            border: 6px solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(135deg, var(--brown), var(--green), var(--yellow), var(--orange));
+            border-radius: 30px;
+            z-index: -1;
+            animation: rainbow 3s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        .card h2 {
+            font-family: 'Bubblegum Sans', cursive;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--brown);
+            text-shadow: 3px 3px 0 var(--yellow);
+        }
+
+        .card h3 {
+            font-family: 'Chewy', cursive;
+            font-size: 2.2rem;
+            margin: 2rem 0 1.5rem;
+            color: var(--green);
+        }
+
+        .card p, .card li {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .card ul {
+            margin-left: 2rem;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 5px solid;
+            transition: all 0.4s;
+            cursor: pointer;
+        }
+
+        .example-card:hover {
+            transform: translateY(-15px) rotate(-5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: bounce-icon 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce-icon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .example-card h4 {
+            font-family: 'Chewy', cursive;
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .example-card p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .activity-box {
+            background: linear-gradient(135deg, #E0F2FE 0%, #BAE6FD 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 6px solid var(--blue);
+            box-shadow: 0 10px 30px rgba(77,150,255,0.3);
+        }
+
+        .activity-box h3 {
+            color: #0369A1;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        .quiz-box {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-radius: 25px;
+            padding: 3rem;
+            margin: 2rem 0;
+            border: 6px solid var(--orange);
+            box-shadow: 0 10px 30px rgba(255,159,28,0.3);
+        }
+
+        .quiz-box h3 {
+            color: #C2410C;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        .question {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-left: 8px solid var(--brown);
+        }
+
+        .question h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            background: #F3F4F6;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 4px solid transparent;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .option:hover {
+            background: #E5E7EB;
+            transform: translateX(10px) scale(1.02);
+            border-color: var(--brown);
+        }
+
+        .option.selected {
+            border-color: var(--brown);
+            background: #DBEAFE;
+            transform: translateX(10px);
+        }
+
+        .option.correct {
+            border-color: var(--green);
+            background: #D1FAE5;
+            animation: correctBounce 0.6s;
+        }
+
+        @keyframes correctBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .option.incorrect {
+            border-color: var(--red);
+            background: #FEE2E2;
+            animation: shake 0.6s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 2rem;
+            border-radius: 15px;
+            font-weight: 700;
+            display: none;
+            font-size: 1.3rem;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: popIn 0.5s;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .feedback.correct {
+            background: #D1FAE5;
+            color: #065F46;
+            border: 4px solid var(--green);
+        }
+
+        .feedback.incorrect {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 4px solid var(--red);
+        }
+
+        .score-display {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 5px solid var(--brown);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--green), #059669);
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 20px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+        }
+
+        .btn-check {
+            background: linear-gradient(135deg, var(--brown), #A0522D);
+        }
+
+        .btn-reset {
+            background: linear-gradient(135deg, var(--orange), var(--yellow));
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .drag-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            cursor: move;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            border: 4px solid var(--brown);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 700;
+            transition: all 0.3s;
+            margin: 0.8rem;
+            display: inline-block;
+        }
+
+        .drag-item:hover {
+            transform: rotate(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+
+        .drop-zone {
+            background: rgba(139, 69, 19, 0.1);
+            border: 5px dashed var(--brown);
+            border-radius: 20px;
+            padding: 2.5rem;
+            min-height: 180px;
+            margin: 1.5rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .drop-zone.drag-over {
+            background: rgba(139, 69, 19, 0.3);
+            transform: scale(1.02);
+            border-color: var(--green);
+        }
+
+        input[type="text"] {
+            border: 3px solid var(--brown);
+            padding: 0.8rem;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            font-family: 'Fredoka', sans-serif;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--green);
+            box-shadow: 0 0 10px rgba(107, 207, 127, 0.3);
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .topic-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.4s;
+            border: 6px solid;
+            position: relative;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+
+        .topic-card .icon {
+            font-size: 6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .topic-card h3 {
+            margin: 1rem 0;
+            font-size: 1.7rem;
+        }
+
+        .topic-card p {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.5rem;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 2rem;
+            }
+
+            .card h2 {
+                font-size: 2.2rem;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
-<body id="top">
-<header>
-  <h1>🌱 Soil Explorer 🌱</h1>
-  <p>Grade 3 Science – Learning About Soil</p>
-</header>
-<main>
-<p><strong>This is the downloadable index.html file.</strong></p>
-<p>Upload this file to GitHub and enable GitHub Pages.</p>
-</main>
-<footer>
-<p>© Grade 3 Science – Soil Explorer</p>
-</footer>
+<body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <header>
+        <h1>🌱 Soils in the Environment! 🌍</h1>
+        <p class="subtitle">Let's Explore the Ground Beneath Our Feet!</p>
+    </header>
+
+    <nav>
+        <div class="nav-grid">
+            <button class="nav-btn active" onclick="showPage('home', event)">🏠 Home</button>
+            <button class="nav-btn" onclick="showPage('e11', event)">E1.1 - Importance</button>
+            <button class="nav-btn" onclick="showPage('e12', event)">E1.2 - Human Impact</button>
+            <button class="nav-btn" onclick="showPage('e21', event)">E2.1 - Components</button>
+            <button class="nav-btn" onclick="showPage('e22', event)">E2.2 - Substances</button>
+            <button class="nav-btn" onclick="showPage('e23', event)">E2.3 - Types of Soils</button>
+            <button class="nav-btn" onclick="showPage('e24', event)">E2.4 - Erosion</button>
+            <button class="nav-btn" onclick="showPage('e25', event)">E2.5 - Soil Health</button>
+            <button class="nav-btn" onclick="showPage('e26', event)">E2.6 - Composting</button>
+        </div>
+    </nav>
+
+    <button class="back-button" id="backButton" onclick="showPage('home', event)">
+        ← Back to Lessons
+    </button>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <div class="card" style="border-color: var(--brown);">
+                <h2>Welcome, Young Soil Scientists! 🎉</h2>
+                <p>Get ready to dig into the amazing world of SOIL! You'll discover what makes soil healthy, how it helps plants grow, and why we need to take care of it!</p>
+                <p>Click on any topic below to start your learning adventure. Let's get our hands dirty! 🌱</p>
+            </div>
+
+            <div class="home-grid">
+                <div class="topic-card" style="border-color: var(--green);" onclick="showPage('e11', event)">
+                    <div class="icon">🌍</div>
+                    <h3>Importance of Soils</h3>
+                    <p>Why soil matters to everyone!</p>
+                </div>
+                <div class="topic-card" style="border-color: var(--brown);" onclick="showPage('e12', event)">
+                    <div class="icon">👷</div>
+                    <h3>Human Impact</h3>
+                    <p>How we affect soils!</p>
+                </div>
+                <div class="topic-card" style="border-color: var(--orange);" onclick="showPage('e21', event)">
+                    <div class="icon">🔬</div>
+                    <h3>Soil Components</h3>
+                    <p>What's in healthy soil?</p>
+                </div>
+                <div class="topic-card" style="border-color: var(--blue);" onclick="showPage('e22', event)">
+                    <div class="icon">💧</div>
+                    <h3>Substances in Soil</h3>
+                    <p>What gets added to soil!</p>
+                </div>
+                <div class="topic-card" style="border-color: var(--purple);" onclick="showPage('e23', event)">
+                    <div class="icon">🗺️</div>
+                    <h3>Types of Soils</h3>
+                    <p>Different soils in Ontario!</p>
+                </div>
+                <div class="topic-card" style="border-color: var(--red);" onclick="showPage('e24', event)">
+                    <div class="icon">🌊</div>
+                    <h3>Erosion</h3>
+                    <p>When soil washes away!</p>
+                </div>
+                <div class="topic-card" style="border-color: var(--teal);" onclick="showPage('e25', event)">
+                    <div class="icon">🌾</div>
+                    <h3>Maintaining Soil Health</h3>
+                    <p>Keeping soil healthy!</p>
+                </div>
+                <div class="topic-card" style="border-color: var(--yellow);" onclick="showPage('e26', event)">
+                    <div class="icon">♻️</div>
+                    <h3>Composting</h3>
+                    <p>Turning waste into treasure!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- E1.1 PAGE - COMPLETE -->
+        <div id="e11" class="page">
+            <div class="card" style="border-color: var(--green);">
+                <h2>E1.1 - Importance of Soils 🌍</h2>
+                <p>Soil is one of the most <strong>important resources</strong> on Earth! It helps plants grow, provides homes for animals, and cleans our water!</p>
+
+
+                <h3>Why Soil is Important 🌟</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🌾</div>
+                        <h4>Grows Our Food</h4>
+                        <p>Plants need soil to grow!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🏠</div>
+                        <h4>Homes for Animals</h4>
+                        <p>Many creatures live in soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">💧</div>
+                        <h4>Filters Water</h4>
+                        <p>Soil cleans water naturally!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🌳</div>
+                        <h4>Supports Forests</h4>
+                        <p>Trees need healthy soil!</p>
+                    </div>
+                </div>
+
+                <h3>Benefits to Society 👥</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🍎</div>
+                        <h4>Food Production</h4>
+                        <p>Grows fruits and vegetables!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🏗️</div>
+                        <h4>Building Foundation</h4>
+                        <p>Supports our structures!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🌸</div>
+                        <h4>Beautiful Gardens</h4>
+                        <p>Makes our world pretty!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">💚</div>
+                        <h4>Clean Environment</h4>
+                        <p>Keeps nature healthy!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e11-drag-items">
+                        <div class="drag-item" draggable="true" data-category="food">🌾 Growing crops</div>
+                        <div class="drag-item" draggable="true" data-category="food">🍎 Producing vegetables</div>
+                        <div class="drag-item" draggable="true" data-category="home">🪱 Earthworm tunnels</div>
+                        <div class="drag-item" draggable="true" data-category="home">🐜 Ant colonies</div>
+                        <div class="drag-item" draggable="true" data-category="filter">💧 Cleaning rainwater</div>
+                        <div class="drag-item" draggable="true" data-category="filter">🌊 Removing pollutants</div>
+                        <div class="drag-item" draggable="true" data-category="support">🌳 Tree roots</div>
+                        <div class="drag-item" draggable="true" data-category="support">🌿 Plant growth</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">FILTER</h4>
+                            <div class="drop-zone" data-category="filter"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">HOME</h4>
+                            <div class="drop-zone" data-category="home"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE11DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE11DragDrop()">Reset</button>
+                    </div>
+                    <div id="e11-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e11-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e11-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e11-blank2" style="width: 200px;"> to grow strong and healthy.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e11-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e11-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e11-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e11-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e11-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e11-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e11-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e11-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE11FillBlanks()">Check My Answers!</button>
+                    <div id="e11-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e11-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e11')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e11-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E1.2 PAGE - COMPLETE -->
+        <div id="e12" class="page">
+            <div class="card" style="border-color: var(--brown);">
+                <h2>E1.2 - Human Impact on Soils 👷</h2>
+                <p>Humans affect soil in both <strong>positive and negative</strong> ways. We need to protect and improve our soils!</p>
+
+
+                <h3>Negative Impacts ⚠️</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🏭</div>
+                        <h4>Pollution</h4>
+                        <p>Chemicals harm soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🚜</div>
+                        <h4>Over-farming</h4>
+                        <p>Uses up nutrients!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🏗️</div>
+                        <h4>Construction</h4>
+                        <p>Removes topsoil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🗑️</div>
+                        <h4>Littering</h4>
+                        <p>Adds harmful waste!</p>
+                    </div>
+                </div>
+
+                <h3>Positive Actions ✅</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">♻️</div>
+                        <h4>Composting</h4>
+                        <p>Adds nutrients back!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🌱</div>
+                        <h4>Planting Trees</h4>
+                        <p>Prevents erosion!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🚫</div>
+                        <h4>Reduce Chemicals</h4>
+                        <p>Keeps soil clean!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🌾</div>
+                        <h4>Crop Rotation</h4>
+                        <p>Maintains health!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e12-drag-items">
+                        <div class="drag-item" draggable="true" data-category="negative">🏭 Factory pollution</div>
+                        <div class="drag-item" draggable="true" data-category="negative">🗑️ Dumping garbage</div>
+                        <div class="drag-item" draggable="true" data-category="negative">🚜 Over-farming land</div>
+                        <div class="drag-item" draggable="true" data-category="negative">🏗️ Paving over soil</div>
+                        <div class="drag-item" draggable="true" data-category="positive">♻️ Making compost</div>
+                        <div class="drag-item" draggable="true" data-category="positive">🌱 Planting cover crops</div>
+                        <div class="drag-item" draggable="true" data-category="positive">🚫 Using less chemicals</div>
+                        <div class="drag-item" draggable="true" data-category="positive">🌳 Growing trees</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">POSITIVE</h4>
+                            <div class="drop-zone" data-category="positive"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">NEGATIVE</h4>
+                            <div class="drop-zone" data-category="negative"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE12DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE12DragDrop()">Reset</button>
+                    </div>
+                    <div id="e12-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e12-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e12-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e12-blank2" style="width: 200px;"> to grow strong and healthy.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e12-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e12-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e12-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e12-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e12-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e12-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e12-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e12-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE12FillBlanks()">Check My Answers!</button>
+                    <div id="e12-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e12-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e12')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e12-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E2.1 PAGE - COMPLETE -->
+        <div id="e21" class="page">
+            <div class="card" style="border-color: var(--orange);">
+                <h2>E2.1 - Components of Soil 🔬</h2>
+                <p>Healthy soil is made of <strong>living and non-living</strong> parts that all work together!</p>
+
+
+                <h3>Living Components 🐛</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🪱</div>
+                        <h4>Earthworms</h4>
+                        <p>Mix and aerate soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🐜</div>
+                        <h4>Insects</h4>
+                        <p>Break down materials!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🦠</div>
+                        <h4>Bacteria</h4>
+                        <p>Decompose waste!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🍄</div>
+                        <h4>Fungi</h4>
+                        <p>Help plant roots!</p>
+                    </div>
+                </div>
+
+                <h3>Non-Living Components 🪨</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🪨</div>
+                        <h4>Rocks & Minerals</h4>
+                        <p>Provide nutrients!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">💧</div>
+                        <h4>Water</h4>
+                        <p>Helps plants grow!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">💨</div>
+                        <h4>Air Pockets</h4>
+                        <p>Roots need oxygen!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🍂</div>
+                        <h4>Dead Plants</h4>
+                        <p>Become nutrients!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e21-drag-items">
+                        <div class="drag-item" draggable="true" data-category="living">🪱 Earthworms</div>
+                        <div class="drag-item" draggable="true" data-category="living">🐜 Ants</div>
+                        <div class="drag-item" draggable="true" data-category="living">🦠 Bacteria</div>
+                        <div class="drag-item" draggable="true" data-category="living">🍄 Fungi</div>
+                        <div class="drag-item" draggable="true" data-category="nonliving">🪨 Rocks</div>
+                        <div class="drag-item" draggable="true" data-category="nonliving">💧 Water</div>
+                        <div class="drag-item" draggable="true" data-category="nonliving">💨 Air</div>
+                        <div class="drag-item" draggable="true" data-category="nonliving">⚪ Minerals</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">LIVING</h4>
+                            <div class="drop-zone" data-category="living"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">NONLIVING</h4>
+                            <div class="drop-zone" data-category="nonliving"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE21DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE21DragDrop()">Reset</button>
+                    </div>
+                    <div id="e21-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e21-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e21-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e21-blank2" style="width: 200px;"> to grow strong and healthy.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e21-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e21-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e21-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e21-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e21-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e21-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e21-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e21-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE21FillBlanks()">Check My Answers!</button>
+                    <div id="e21-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e21-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e21')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e21-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E2.2 PAGE - COMPLETE -->
+        <div id="e22" class="page">
+            <div class="card" style="border-color: var(--blue);">
+                <h2>E2.2 - Substances in Soil 💧</h2>
+                <p>Different <strong>substances</strong> can be added to soil or absorbed by it - some are helpful, others are harmful!</p>
+
+
+                <h3>Helpful Substances ✅</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">♻️</div>
+                        <h4>Compost</h4>
+                        <p>Adds nutrients!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">💧</div>
+                        <h4>Clean Water</h4>
+                        <p>Helps plants grow!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🌾</div>
+                        <h4>Mulch</h4>
+                        <p>Protects soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🍂</div>
+                        <h4>Natural Fertilizer</h4>
+                        <p>Feeds plants!</p>
+                    </div>
+                </div>
+
+                <h3>Harmful Substances ⚠️</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">⚗️</div>
+                        <h4>Chemicals</h4>
+                        <p>Can poison soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🛢️</div>
+                        <h4>Oil Spills</h4>
+                        <p>Kill organisms!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🗑️</div>
+                        <h4>Garbage</h4>
+                        <p>Pollutes soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🏭</div>
+                        <h4>Industrial Waste</h4>
+                        <p>Very toxic!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e22-drag-items">
+                        <div class="drag-item" draggable="true" data-category="helpful">♻️ Compost</div>
+                        <div class="drag-item" draggable="true" data-category="helpful">🌾 Organic mulch</div>
+                        <div class="drag-item" draggable="true" data-category="helpful">💧 Rainwater</div>
+                        <div class="drag-item" draggable="true" data-category="helpful">🍂 Leaf litter</div>
+                        <div class="drag-item" draggable="true" data-category="harmful">⚗️ Pesticides</div>
+                        <div class="drag-item" draggable="true" data-category="harmful">🛢️ Motor oil</div>
+                        <div class="drag-item" draggable="true" data-category="harmful">🗑️ Plastic waste</div>
+                        <div class="drag-item" draggable="true" data-category="harmful">🏭 Factory chemicals</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">HELPFUL</h4>
+                            <div class="drop-zone" data-category="helpful"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">HARMFUL</h4>
+                            <div class="drop-zone" data-category="harmful"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE22DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE22DragDrop()">Reset</button>
+                    </div>
+                    <div id="e22-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e22-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e22-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e22-blank2" style="width: 200px;"> to grow strong and healthy.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e22-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e22-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e22-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e22-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e22-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e22-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e22-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e22-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE22FillBlanks()">Check My Answers!</button>
+                    <div id="e22-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e22-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e22')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e22-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E2.3 PAGE - COMPLETE -->
+        <div id="e23" class="page">
+            <div class="card" style="border-color: var(--purple);">
+                <h2>E2.3 - Types of Soils in Ontario 🗺️</h2>
+                <p>Ontario has many different <strong>soil types</strong>, and each one is better for growing different crops!</p>
+
+
+                <h3>Common Soil Types 🌾</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🟫</div>
+                        <h4>Sandy Soil</h4>
+                        <p>Drains water quickly!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🟤</div>
+                        <h4>Clay Soil</h4>
+                        <p>Holds water well!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🟠</div>
+                        <h4>Loam Soil</h4>
+                        <p>Best for most plants!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">⚫</div>
+                        <h4>Peat Soil</h4>
+                        <p>Rich in organic matter!</p>
+                    </div>
+                </div>
+
+                <h3>What Grows Where 🌱</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🥕</div>
+                        <h4>Root Vegetables</h4>
+                        <p>Love sandy, loose soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🌾</div>
+                        <h4>Wheat & Grains</h4>
+                        <p>Thrive in loam!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🌸</div>
+                        <h4>Flowers</h4>
+                        <p>Enjoy rich peat!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🌳</div>
+                        <h4>Trees</h4>
+                        <p>Adapt to clay soil!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e23-drag-items">
+                        <div class="drag-item" draggable="true" data-category="sandy">🥕 Carrots</div>
+                        <div class="drag-item" draggable="true" data-category="sandy">🥔 Potatoes</div>
+                        <div class="drag-item" draggable="true" data-category="loam">🌾 Wheat</div>
+                        <div class="drag-item" draggable="true" data-category="loam">🌽 Corn</div>
+                        <div class="drag-item" draggable="true" data-category="clay">🌳 Apple trees</div>
+                        <div class="drag-item" draggable="true" data-category="clay">🌿 Shrubs</div>
+                        <div class="drag-item" draggable="true" data-category="peat">🌸 Flowers</div>
+                        <div class="drag-item" draggable="true" data-category="peat">🫐 Berries</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">PEAT</h4>
+                            <div class="drop-zone" data-category="peat"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">CLAY</h4>
+                            <div class="drop-zone" data-category="clay"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE23DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE23DragDrop()">Reset</button>
+                    </div>
+                    <div id="e23-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e23-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e23-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e23-blank2" style="width: 200px;"> to grow strong and healthy.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e23-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e23-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e23-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e23-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e23-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e23-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e23-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e23-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE23FillBlanks()">Check My Answers!</button>
+                    <div id="e23-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e23-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e23')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e23-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E2.4 PAGE - COMPLETE -->
+        <div id="e24" class="page">
+            <div class="card" style="border-color: var(--red);">
+                <h2>E2.4 - Erosion 🌊</h2>
+                <p><strong>Erosion</strong> is when soil is moved from one place to another by wind, water, or ice!</p>
+
+
+                <h3>Causes of Erosion 💨</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">💧</div>
+                        <h4>Rain & Water</h4>
+                        <p>Washes soil away!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">💨</div>
+                        <h4>Wind</h4>
+                        <p>Blows soil around!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">❄️</div>
+                        <h4>Ice</h4>
+                        <p>Breaks up soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🚜</div>
+                        <h4>Over-farming</h4>
+                        <p>Removes plant cover!</p>
+                    </div>
+                </div>
+
+                <h3>Preventing Erosion 🛡️</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🌳</div>
+                        <h4>Plant Trees</h4>
+                        <p>Roots hold soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🌾</div>
+                        <h4>Cover Crops</h4>
+                        <p>Protect bare soil!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🪨</div>
+                        <h4>Terracing</h4>
+                        <p>Slows water flow!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🌿</div>
+                        <h4>Ground Cover</h4>
+                        <p>Stops wind!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e24-drag-items">
+                        <div class="drag-item" draggable="true" data-category="cause">💧 Heavy rainfall</div>
+                        <div class="drag-item" draggable="true" data-category="cause">💨 Strong winds</div>
+                        <div class="drag-item" draggable="true" data-category="cause">❄️ Melting ice</div>
+                        <div class="drag-item" draggable="true" data-category="cause">🚜 Bare farmland</div>
+                        <div class="drag-item" draggable="true" data-category="prevent">🌳 Planting trees</div>
+                        <div class="drag-item" draggable="true" data-category="prevent">🌾 Growing grass</div>
+                        <div class="drag-item" draggable="true" data-category="prevent">🪨 Building terraces</div>
+                        <div class="drag-item" draggable="true" data-category="prevent">🌿 Adding mulch</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">CAUSE</h4>
+                            <div class="drop-zone" data-category="cause"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">PREVENT</h4>
+                            <div class="drop-zone" data-category="prevent"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE24DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE24DragDrop()">Reset</button>
+                    </div>
+                    <div id="e24-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e24-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e24-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e24-blank2" style="width: 200px;"> to grow strong and healthy.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e24-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e24-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e24-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e24-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e24-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e24-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e24-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e24-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE24FillBlanks()">Check My Answers!</button>
+                    <div id="e24-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e24-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e24')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e24-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E2.5 PAGE - COMPLETE -->
+        <div id="e25" class="page">
+            <div class="card" style="border-color: var(--teal);">
+                <h2>E2.5 - Maintaining Soil Health 🌾</h2>
+                <p>We can use many <strong>strategies</strong> to keep soil healthy and productive in Ontario!</p>
+
+
+                <h3>Soil Health Strategies 💚</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🔄</div>
+                        <h4>Crop Rotation</h4>
+                        <p>Different crops each year!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🌾</div>
+                        <h4>Cover Crops</h4>
+                        <p>Protect soil when empty!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">♻️</div>
+                        <h4>Add Compost</h4>
+                        <p>Return nutrients!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🚫</div>
+                        <h4>Reduce Tilling</h4>
+                        <p>Don't disturb too much!</p>
+                    </div>
+                </div>
+
+                <h3>Benefits of Healthy Soil 🌟</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🌱</div>
+                        <h4>Better Growth</h4>
+                        <p>Plants thrive!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">💧</div>
+                        <h4>Water Retention</h4>
+                        <p>Holds moisture!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🐛</div>
+                        <h4>More Organisms</h4>
+                        <p>Full of life!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🌍</div>
+                        <h4>Environmental Health</h4>
+                        <p>Helps the planet!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e25-drag-items">
+                        <div class="drag-item" draggable="true" data-category="strategy">🔄 Rotating crops</div>
+                        <div class="drag-item" draggable="true" data-category="strategy">🌾 Planting cover</div>
+                        <div class="drag-item" draggable="true" data-category="strategy">♻️ Adding compost</div>
+                        <div class="drag-item" draggable="true" data-category="strategy">🚫 Less tilling</div>
+                        <div class="drag-item" draggable="true" data-category="benefit">🌱 Healthy plants</div>
+                        <div class="drag-item" draggable="true" data-category="benefit">💧 Good water storage</div>
+                        <div class="drag-item" draggable="true" data-category="benefit">🐛 Rich biodiversity</div>
+                        <div class="drag-item" draggable="true" data-category="benefit">🌍 Clean environment</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">STRATEGY</h4>
+                            <div class="drop-zone" data-category="strategy"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">BENEFIT</h4>
+                            <div class="drop-zone" data-category="benefit"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE25DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE25DragDrop()">Reset</button>
+                    </div>
+                    <div id="e25-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e25-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e25-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e25-blank2" style="width: 200px;"> to grow strong and <input type="text" id="e25-blank2" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e25-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e25-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e25-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e25-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e25-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e25-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e25-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e25-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE25FillBlanks()">Check My Answers!</button>
+                    <div id="e25-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e25-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e25')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e25-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E2.6 PAGE - COMPLETE -->
+        <div id="e26" class="page">
+            <div class="card" style="border-color: var(--yellow);">
+                <h2>E2.6 - Composting ♻️</h2>
+                <p><strong>Composting</strong> turns food scraps and yard waste into rich soil! It's like recycling for nature!</p>
+
+
+                <h3>What Can We Compost? 🗑️</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">🍎</div>
+                        <h4>Fruit Scraps</h4>
+                        <p>Apple cores, peels!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🥕</div>
+                        <h4>Vegetable Waste</h4>
+                        <p>Carrot tops, leaves!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">🍂</div>
+                        <h4>Yard Waste</h4>
+                        <p>Leaves, grass clippings!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">☕</div>
+                        <h4>Coffee Grounds</h4>
+                        <p>Great for soil!</p>
+                    </div>
+                </div>
+
+                <h3>Benefits of Composting 🌟</h3>
+                <div class="example-grid">
+                    <div class="example-card" style="border-color: var(--blue);">
+                        <div class="icon">♻️</div>
+                        <h4>Reduces Waste</h4>
+                        <p>Less garbage!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--pink);">
+                        <div class="icon">🌱</div>
+                        <h4>Rich Nutrients</h4>
+                        <p>Feeds plants!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--orange);">
+                        <div class="icon">💧</div>
+                        <h4>Holds Water</h4>
+                        <p>Keeps soil moist!</p>
+                    </div>
+                    <div class="example-card" style="border-color: var(--green);">
+                        <div class="icon">🌍</div>
+                        <h4>Helps Planet</h4>
+                        <p>Good for Earth!</p>
+                    </div>
+                </div>
+
+                <div class="activity-box">
+                    <h3>🎯 Activity 1: Drag & Drop Challenge!</h3>
+                    
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; margin: 2rem 0;" id="e26-drag-items">
+                        <div class="drag-item" draggable="true" data-category="yes">🍎 Apple cores</div>
+                        <div class="drag-item" draggable="true" data-category="yes">🍂 Fallen leaves</div>
+                        <div class="drag-item" draggable="true" data-category="yes">🥕 Veggie scraps</div>
+                        <div class="drag-item" draggable="true" data-category="yes">☕ Coffee grounds</div>
+                        <div class="drag-item" draggable="true" data-category="no">🥩 Meat</div>
+                        <div class="drag-item" draggable="true" data-category="no">🧀 Dairy products</div>
+                        <div class="drag-item" draggable="true" data-category="no">🛢️ Oil</div>
+                        <div class="drag-item" draggable="true" data-category="no">🥤 Plastic</div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">NO</h4>
+                            <div class="drop-zone" data-category="no"></div>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center; color: var(--green); font-size: 1.5rem;">YES</h4>
+                            <div class="drop-zone" data-category="yes"></div>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button class="btn btn-check" onclick="checkE26DragDrop()">Check My Sorting!</button>
+                        <button class="btn btn-reset" onclick="resetE26DragDrop()">Reset</button>
+                    </div>
+                    <div id="e26-drag-feedback" class="feedback"></div>
+                </div>
+
+                <div class="activity-box" style="background: linear-gradient(135deg, #DBEAFE 0%, #BFDBFE 100%); border-color: var(--blue);">
+                    <h3>🎯 Activity 2: Fill in the Blanks!</h3>
+                    
+                    <div id="e26-fill-blank" style="display: grid; gap: 2rem; margin: 2rem 0;">
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                1. <input type="text" id="e26-blank1" style="width: 200px;"> is essential for life on Earth.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                2. Plants need <input type="text" id="e26-blank2" style="width: 200px;"> to grow strong and healthy.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                3. We get our <input type="text" id="e26-blank3" style="width: 200px;"> from healthy soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                4. Many <input type="text" id="e26-blank4" style="width: 200px;"> live underground.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                5. Soil helps filter and clean <input type="text" id="e26-blank5" style="width: 200px;">.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                6. Keeping soil <input type="text" id="e26-blank6" style="width: 200px;"> is everyone's responsibility.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                7. <input type="text" id="e26-blank7" style="width: 200px;"> work hard to maintain good soil.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                8. We must protect the <input type="text" id="e26-blank8" style="width: 200px;"> for future generations.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                9. Soil provides <input type="text" id="e26-blank9" style="width: 200px;"> that plants need.
+                            </p>
+                        </div>
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 3px solid var(--brown);">
+                            <p style="font-weight: 700; font-size: 1.2rem; line-height: 2;">
+                                10. It's <input type="text" id="e26-blank10" style="width: 200px;"> to care for our soil.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-check" onclick="checkE26FillBlanks()">Check My Answers!</button>
+                    <div id="e26-fillblank-feedback" class="feedback"></div>
+                </div>
+
+                <div class="quiz-box">
+                    <h3>📝 Quiz Time!</h3>
+                    <div id="e26-quiz"></div>
+                    <button class="btn btn-check" onclick="checkQuiz('e26')" style="margin-top: 1.5rem;">Submit Quiz</button>
+                    <div id="e26-quiz-score" class="score-display" style="display: none;"></div>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="back-button bottom-back-button" onclick="showPage('home', event)">
+                        ← Back to Lessons
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data
+        const quizData = {
+            e11: [
+                { question: "Why is soil important?", options: ["It looks nice", "It grows our food", "It makes noise", "It floats"], correct: 1 },
+                { question: "What lives in soil?", options: ["Only rocks", "Fish", "Many animals and insects", "Nothing"], correct: 2 },
+                { question: "How does soil help plants?", options: ["Gives them TV", "Provides nutrients and water", "Makes them fly", "Teaches them math"], correct: 1 },
+                { question: "Soil filters:", options: ["Television signals", "Water", "Air", "Sound"], correct: 1 },
+                { question: "Farmers need soil to:", options: ["Play games", "Grow crops", "Build cars", "Swim"], correct: 1 }
+            ],
+            e12: [
+                { question: "What harms soil?", options: ["Clean water", "Pollution and chemicals", "Rain", "Sunshine"], correct: 1 },
+                { question: "How can we help soil?", options: ["Add more garbage", "Make compost", "Pour oil", "Dig it all up"], correct: 1 },
+                { question: "Planting trees helps by:", options: ["Making shade", "Preventing erosion", "Growing fruit", "All of these"], correct: 3 },
+                { question: "Over-farming means:", options: ["Farming too much in one spot", "Growing food", "Watering plants", "Harvesting crops"], correct: 0 },
+                { question: "We should reduce:", options: ["Gardens", "Harmful chemicals", "Plants", "Trees"], correct: 1 }
+            ],
+            e21: [
+                { question: "What is a living part of soil?", options: ["Rock", "Earthworm", "Water", "Sand"], correct: 1 },
+                { question: "What is non-living in soil?", options: ["Bacteria", "Insects", "Water", "Fungi"], correct: 2 },
+                { question: "Earthworms help soil by:", options: ["Eating rocks", "Mixing and aerating it", "Making it wet", "Coloring it"], correct: 1 },
+                { question: "Healthy soil needs:", options: ["Only rocks", "Only water", "Both living and non-living parts", "Nothing"], correct: 2 },
+                { question: "Bacteria in soil:", options: ["Harm plants", "Decompose waste", "Make noise", "Fly away"], correct: 1 }
+            ],
+            e22: [
+                { question: "What helps soil?", options: ["Oil", "Compost", "Garbage", "Chemicals"], correct: 1 },
+                { question: "What harms soil?", options: ["Water", "Compost", "Pesticides", "Leaves"], correct: 2 },
+                { question: "Fertilizer:", options: ["Adds nutrients", "Harms plants", "Is garbage", "Makes noise"], correct: 0 },
+                { question: "Oil spills:", options: ["Help soil", "Kill soil organisms", "Add water", "Grow plants"], correct: 1 },
+                { question: "We should add to soil:", options: ["Natural compost", "Plastic", "Chemicals", "Oil"], correct: 0 }
+            ],
+            e23: [
+                { question: "Which soil drains fastest?", options: ["Clay", "Sandy", "Loam", "Peat"], correct: 1 },
+                { question: "Best soil for most crops?", options: ["Sandy", "Loam", "Rock", "Clay"], correct: 1 },
+                { question: "Clay soil holds:", options: ["Nothing", "Water well", "No water", "Only air"], correct: 1 },
+                { question: "Carrots grow best in:", options: ["Clay", "Concrete", "Sandy soil", "Water"], correct: 2 },
+                { question: "Loam is:", options: ["Pure sand", "Pure clay", "A good mixture", "Only rocks"], correct: 2 }
+            ],
+            e24: [
+                { question: "What is erosion?", options: ["Planting trees", "Soil being moved", "Watering plants", "Making compost"], correct: 1 },
+                { question: "What causes erosion?", options: ["Trees", "Wind and water", "Compost", "Earthworms"], correct: 1 },
+                { question: "How do trees prevent erosion?", options: ["They look nice", "Roots hold soil", "They grow tall", "They make shade"], correct: 1 },
+                { question: "Erosion is harmful because:", options: ["It moves nutrients away", "It makes noise", "It helps plants", "It adds water"], correct: 0 },
+                { question: "To prevent erosion, plant:", options: ["Nothing", "Ground cover", "Rocks", "Garbage"], correct: 1 }
+            ],
+            e25: [
+                { question: "Crop rotation means:", options: ["Growing same crop", "Changing crops each year", "Removing all plants", "Adding water"], correct: 1 },
+                { question: "Cover crops:", options: ["Harm soil", "Protect bare soil", "Are garbage", "Need no water"], correct: 1 },
+                { question: "Compost adds:", options: ["Pollution", "Nutrients", "Garbage", "Chemicals"], correct: 1 },
+                { question: "Too much tilling:", options: ["Helps soil", "Disturbs soil life", "Waters plants", "Grows crops"], correct: 1 },
+                { question: "Healthy soil has:", options: ["Only rocks", "Many organisms", "No water", "No nutrients"], correct: 1 }
+            ],
+            e26: [
+                { question: "What is composting?", options: ["Throwing out garbage", "Turning waste into soil", "Buying new dirt", "Watering plants"], correct: 1 },
+                { question: "We can compost:", options: ["Plastic", "Fruit peels", "Metal", "Glass"], correct: 1 },
+                { question: "Compost helps by:", options: ["Making noise", "Adding nutrients", "Hurting plants", "Using electricity"], correct: 1 },
+                { question: "Do NOT compost:", options: ["Leaves", "Meat and dairy", "Vegetable scraps", "Grass"], correct: 1 },
+                { question: "Composting helps the environment by:", options: ["Making garbage", "Reducing waste", "Using chemicals", "Polluting"], correct: 1 }
+            ]
+        };
+
+        // Page Navigation
+        function showPage(pageId, event) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(pageId).classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            
+            const nav = document.querySelector('nav');
+            const backButton = document.getElementById('backButton');
+            const bottomBackButtons = document.querySelectorAll('.bottom-back-button');
+            
+            if (pageId === 'home') {
+                nav.classList.remove('hidden');
+                backButton.classList.remove('show');
+                bottomBackButtons.forEach(btn => btn.classList.remove('show'));
+            } else {
+                nav.classList.add('hidden');
+                backButton.classList.add('show');
+                bottomBackButtons.forEach(btn => btn.classList.add('show'));
+            }
+            
+            if (pageId !== 'home' && quizData[pageId] && !document.getElementById(`${pageId}-quiz`).innerHTML) {
+                loadQuiz(pageId);
+            }
+            
+            window.scrollTo(0, 0);
+        }
+
+        function loadQuiz(section) {
+            const quizContainer = document.getElementById(`${section}-quiz`);
+            if (!quizContainer || !quizData[section]) return;
+            
+            const questions = quizData[section];
+            let html = '';
+            
+            questions.forEach((q, index) => {
+                html += `
+                    <div class="question" data-question="${index}">
+                        <h4>Question ${index + 1}: ${q.question}</h4>
+                        <div class="options">
+                            ${q.options.map((opt, optIndex) => `
+                                <div class="option" onclick="selectQuizOption(this, '${section}', ${index}, ${optIndex})">
+                                    ${opt}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="feedback" id="${section}-q${index}-feedback"></div>
+                    </div>
+                `;
+            });
+            
+            quizContainer.innerHTML = html;
+        }
+
+        function selectQuizOption(element, section, questionIndex, optionIndex) {
+            const question = element.closest('.question');
+            question.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.dataset.selected = optionIndex;
+        }
+
+        function checkQuiz(section) {
+            if (!quizData[section]) return;
+            
+            const questions = quizData[section];
+            let correct = 0;
+            
+            questions.forEach((q, index) => {
+                const question = document.querySelector(`#${section}-quiz .question[data-question="${index}"]`);
+                const selected = question.querySelector('.option.selected');
+                const feedback = document.getElementById(`${section}-q${index}-feedback`);
+                
+                if (selected) {
+                    const selectedIndex = parseInt(selected.dataset.selected);
+                    question.querySelectorAll('.option').forEach(opt => opt.classList.remove('correct', 'incorrect'));
+                    
+                    if (selectedIndex === q.correct) {
+                        selected.classList.add('correct');
+                        feedback.className = 'feedback correct show';
+                        feedback.textContent = '✓ Correct! Great job!';
+                        correct++;
+                    } else {
+                        selected.classList.add('incorrect');
+                        question.querySelectorAll('.option')[q.correct].classList.add('correct');
+                        feedback.className = 'feedback incorrect show';
+                        feedback.textContent = '✗ Not quite. The correct answer is shown in green.';
+                    }
+                }
+            });
+            
+            const scoreDisplay = document.getElementById(`${section}-quiz-score`);
+            scoreDisplay.style.display = 'block';
+            scoreDisplay.innerHTML = `
+                <h3>Your Score: ${correct} / ${questions.length}</h3>
+                <p>${correct === questions.length ? '🎉 Perfect score!' : 
+                     correct >= questions.length * 0.8 ? '⭐ Great work!' :
+                     correct >= questions.length * 0.6 ? '😊 Good effort!' :
+                     '📚 Keep trying!'}</p>
+            `;
+        }
+
+        // Drag and Drop
+        let draggedElement = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupDragAndDrop();
+        });
+
+        function setupDragAndDrop() {
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+            
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+            
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('drop', handleDrop);
+                zone.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.style.opacity = '0.5';
+        }
+
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            
+            if (draggedElement) {
+                this.appendChild(draggedElement);
+                draggedElement = null;
+            }
+        }
+
+        // Generic Drag-Drop Functions
+        function checkGenericDragDrop(unitId) {
+            const dropZones = document.querySelectorAll(`#${unitId} .drop-zone`);
+            let correct = 0, total = 0;
+            
+            dropZones.forEach(zone => {
+                const category = zone.dataset.category;
+                const items = zone.querySelectorAll('.drag-item');
+                items.forEach(item => {
+                    total++;
+                    if (item.dataset.category === category) {
+                        correct++;
+                        item.style.borderColor = '#6BCF7F';
+                    } else {
+                        item.style.borderColor = '#EF476F';
+                    }
+                });
+            });
+            
+            const feedback = document.getElementById(`${unitId}-drag-feedback`);
+            feedback.className = 'feedback show';
+            if (correct === total && total > 0) {
+                feedback.className = 'feedback correct show';
+                feedback.textContent = `🌱 Perfect! You got all ${total} correct!`;
+            } else {
+                feedback.className = 'feedback incorrect show';
+                feedback.textContent = `You got ${correct} out of ${total} correct. Green is right, red needs to move!`;
+            }
+        }
+
+        function resetGenericDragDrop(unitId) {
+            const items = document.querySelectorAll(`#${unitId}-drag-items .drag-item`);
+            const container = document.getElementById(`${unitId}-drag-items`);
+            items.forEach(item => {
+                item.style.borderColor = 'var(--brown)';
+                container.appendChild(item);
+            });
+            document.getElementById(`${unitId}-drag-feedback`).className = 'feedback';
+        }
+
+        // Specific functions for each unit
+        function checkE11DragDrop() { checkGenericDragDrop('e11'); }
+        function resetE11DragDrop() { resetGenericDragDrop('e11'); }
+        function checkE12DragDrop() { checkGenericDragDrop('e12'); }
+        function resetE12DragDrop() { resetGenericDragDrop('e12'); }
+        function checkE21DragDrop() { checkGenericDragDrop('e21'); }
+        function resetE21DragDrop() { resetGenericDragDrop('e21'); }
+        function checkE22DragDrop() { checkGenericDragDrop('e22'); }
+        function resetE22DragDrop() { resetGenericDragDrop('e22'); }
+        function checkE23DragDrop() { checkGenericDragDrop('e23'); }
+        function resetE23DragDrop() { resetGenericDragDrop('e23'); }
+        function checkE24DragDrop() { checkGenericDragDrop('e24'); }
+        function resetE24DragDrop() { resetGenericDragDrop('e24'); }
+        function checkE25DragDrop() { checkGenericDragDrop('e25'); }
+        function resetE25DragDrop() { resetGenericDragDrop('e25'); }
+        function checkE26DragDrop() { checkGenericDragDrop('e26'); }
+        function resetE26DragDrop() { resetGenericDragDrop('e26'); }
+
+        // Fill-in-Blank Answers
+        const blankAnswers = {
+            e11: {
+                'e11-blank1': ['Soil', 'soil', 'Earth', 'earth'],
+                'e11-blank2': ['plants', 'Plants', 'crops', 'Crops'],
+                'e11-blank3': ['food', 'Food', 'nutrition', 'Nutrition'],
+                'e11-blank4': ['animals', 'Animals', 'creatures', 'Creatures'],
+                'e11-blank5': ['water', 'Water', 'rainwater', 'Rainwater'],
+                'e11-blank6': ['healthy', 'Healthy', 'good', 'Good'],
+                'e11-blank7': ['Farmers', 'farmers', 'Growers', 'growers'],
+                'e11-blank8': ['environment', 'Environment', 'nature', 'Nature'],
+                'e11-blank9': ['nutrients', 'Nutrients', 'minerals', 'Minerals'],
+                'e11-blank10': ['important', 'Important', 'essential', 'Essential']
+            },
+            e12: {
+                'e12-blank1': ['Humans', 'humans', 'People', 'people'],
+                'e12-blank2': ['plants', 'Plants', 'crops', 'Crops'],
+                'e12-blank3': ['food', 'Food'],
+                'e12-blank4': ['animals', 'Animals', 'creatures', 'Creatures'],
+                'e12-blank5': ['water', 'Water'],
+                'e12-blank6': ['healthy', 'Healthy', 'good', 'Good'],
+                'e12-blank7': ['Farmers', 'farmers'],
+                'e12-blank8': ['environment', 'Environment', 'nature', 'Nature'],
+                'e12-blank9': ['nutrients', 'Nutrients'],
+                'e12-blank10': ['important', 'Important', 'essential', 'Essential']
+            },
+            e21: {
+                'e21-blank1': ['living', 'Living', 'alive', 'Alive'],
+                'e21-blank2': ['plants', 'Plants'],
+                'e21-blank3': ['food', 'Food'],
+                'e21-blank4': ['animals', 'Animals'],
+                'e21-blank5': ['water', 'Water'],
+                'e21-blank6': ['healthy', 'Healthy'],
+                'e21-blank7': ['Farmers', 'farmers'],
+                'e21-blank8': ['environment', 'Environment'],
+                'e21-blank9': ['nutrients', 'Nutrients'],
+                'e21-blank10': ['important', 'Important']
+            },
+            e22: {
+                'e22-blank1': ['Substances', 'substances', 'Materials', 'materials'],
+                'e22-blank2': ['plants', 'Plants'],
+                'e22-blank3': ['food', 'Food'],
+                'e22-blank4': ['animals', 'Animals'],
+                'e22-blank5': ['water', 'Water'],
+                'e22-blank6': ['healthy', 'Healthy'],
+                'e22-blank7': ['Farmers', 'farmers'],
+                'e22-blank8': ['environment', 'Environment'],
+                'e22-blank9': ['nutrients', 'Nutrients'],
+                'e22-blank10': ['important', 'Important']
+            },
+            e23: {
+                'e23-blank1': ['Ontario', 'ontario'],
+                'e23-blank2': ['plants', 'Plants'],
+                'e23-blank3': ['food', 'Food'],
+                'e23-blank4': ['animals', 'Animals'],
+                'e23-blank5': ['water', 'Water'],
+                'e23-blank6': ['healthy', 'Healthy'],
+                'e23-blank7': ['Farmers', 'farmers'],
+                'e23-blank8': ['environment', 'Environment'],
+                'e23-blank9': ['nutrients', 'Nutrients'],
+                'e23-blank10': ['important', 'Important']
+            },
+            e24: {
+                'e24-blank1': ['Erosion', 'erosion'],
+                'e24-blank2': ['plants', 'Plants'],
+                'e24-blank3': ['food', 'Food'],
+                'e24-blank4': ['animals', 'Animals'],
+                'e24-blank5': ['soil', 'Soil'],
+                'e24-blank6': ['trees', 'Trees'],
+                'e24-blank7': ['Farmers', 'farmers'],
+                'e24-blank8': ['environment', 'Environment'],
+                'e24-blank9': ['harmful', 'Harmful'],
+                'e24-blank10': ['important', 'Important']
+            },
+            e25: {
+                'e25-blank1': ['maintaining', 'Maintaining', 'keeping', 'Keeping'],
+                'e25-blank2': ['plants', 'Plants'],
+                'e25-blank3': ['food', 'Food'],
+                'e25-blank4': ['animals', 'Animals'],
+                'e25-blank5': ['water', 'Water'],
+                'e25-blank6': ['healthy', 'Healthy'],
+                'e25-blank7': ['Farmers', 'farmers'],
+                'e25-blank8': ['environment', 'Environment'],
+                'e25-blank9': ['nutrients', 'Nutrients'],
+                'e25-blank10': ['protect', 'Protect']
+            },
+            e26: {
+                'e26-blank1': ['Composting', 'composting'],
+                'e26-blank2': ['plants', 'Plants'],
+                'e26-blank3': ['food', 'Food'],
+                'e26-blank4': ['animals', 'Animals'],
+                'e26-blank5': ['water', 'Water'],
+                'e26-blank6': ['healthy', 'Healthy'],
+                'e26-blank7': ['Farmers', 'farmers'],
+                'e26-blank8': ['soil', 'Soil'],
+                'e26-blank9': ['healthy', 'Healthy'],
+                'e26-blank10': ['environment', 'Environment']
+            }
+        };
+
+        function checkGenericFillBlanks(unitId) {
+            let correct = 0;
+            const total = 10;
+            const answers = blankAnswers[unitId];
+            
+            Object.keys(answers).forEach(blankId => {
+                const input = document.getElementById(blankId);
+                const userAnswer = input.value.trim();
+                const correctAnswers = answers[blankId];
+                
+                if (correctAnswers.includes(userAnswer)) {
+                    input.style.borderColor = '#6BCF7F';
+                    input.style.backgroundColor = '#D1FAE5';
+                    correct++;
+                } else {
+                    input.style.borderColor = '#EF476F';
+                    input.style.backgroundColor = '#FEE2E2';
+                }
+            });
+            
+            const feedback = document.getElementById(`${unitId}-fillblank-feedback`);
+            feedback.className = correct === total ? 'feedback correct show' : 'feedback incorrect show';
+            
+            if (correct === total) {
+                feedback.textContent = `🌱 Perfect! All ${total} blanks filled correctly!`;
+            } else {
+                feedback.textContent = `You got ${correct} out of ${total} correct. Green boxes are right, red boxes need fixing!`;
+            }
+        }
+
+        function checkE11FillBlanks() { checkGenericFillBlanks('e11'); }
+        function checkE12FillBlanks() { checkGenericFillBlanks('e12'); }
+        function checkE21FillBlanks() { checkGenericFillBlanks('e21'); }
+        function checkE22FillBlanks() { checkGenericFillBlanks('e22'); }
+        function checkE23FillBlanks() { checkGenericFillBlanks('e23'); }
+        function checkE24FillBlanks() { checkGenericFillBlanks('e24'); }
+        function checkE25FillBlanks() { checkGenericFillBlanks('e25'); }
+        function checkE26FillBlanks() { checkGenericFillBlanks('e26'); }
+    </script>
 </body>
 </html>
